@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import { resolve, extname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import dts from 'unplugin-dts/vite';
-import { libInjectCss } from 'vite-plugin-lib-inject-css';
 import { globSync } from 'glob';
 
 export default defineConfig({
@@ -15,7 +14,6 @@ export default defineConfig({
       insertTypesEntry: true,
       copyDtsFiles: true,
     }),
-    libInjectCss(),
   ],
   build: {
     copyPublicDir: false,
@@ -26,7 +24,7 @@ export default defineConfig({
     rolldownOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       input: Object.fromEntries(
-        globSync(['src/lib/main.ts', 'src/lib/**/**/*.{ts,tsx,scss}', 'src/lib/**/*.{ts,tsx}']).map((file: string) => [
+        globSync(['src/lib/main.ts', 'src/lib/**/**/*.{ts,tsx}', 'src/lib/**/*.{ts,tsx}']).map((file: string) => [
           relative('src/lib', file.slice(0, file.length - extname(file).length)),
           fileURLToPath(new URL(file, import.meta.url)),
         ]),
