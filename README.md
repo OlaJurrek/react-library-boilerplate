@@ -1,59 +1,70 @@
-1. create blank React + Typescript template
+# React Library Boilerplate
 
-```
-npm create vite@latest
-```
+A minimal Vite-based boilerplate for TypeScript React libraries with hooks and utilities that don't require CSS.
 
-2. Immediataly commit the blank project to seperate vite code from mine
-3. Add .nvmrc with Node version and commit it
-4. Install prettier `nom i -D prettier` and add .prettierrc
-5. vite library mode: vite.config.ts, add tsconfig.lib.json, update build script & and prepublish script in package.json, update tsconfig.app.json
-6. Building types. We need to use a library unplugin-dts:
-   - `npm i -D unplugin-dts`
-     in vite.config.ts:
-     `import dts from "unplugin-dts/vite";`
-     ```
-     plugins: [
-     react(),
-     dts({
-     include: ["src/lib"],
-     tsconfigPath: "./tsconfig.lib.json",
-     insertTypesEntry: true,
-     copyDtsFiles: true,
-     }),
-     ],
-     ```
-7. add rollupOptions with external and output.global
-8. update package.json (see commits)
-9. remove dist from .gitignore, run `npm run build` and commit it
-10. Local testing with npm link:
+## Features
 
-```
-# In your package directory
-npm link
+- **TypeScript** — Full type safety with declaration files
+- **Vite** — Fast builds and hot module replacement
+- **ES Modules** — Outputs modern ES format
+- **No CSS** — Pure TypeScript/JavaScript utilities
+- **Tree-shakable** — Optimized for bundlers
+
+## Installation
+
+```bash
+npm install
 ```
 
-```
-# In your test project directory
-npm link ../path-to-your-package
-```
+## Development
 
-Removing connection
+Start the development server:
 
-1. Using npm unlink in your test project:
-
-```
-npm unlink ../path-to-your-package
+```bash
+npm run dev
 ```
 
-Note: This only removes the link in your project, not the global symlink.
+## Building
 
-2. The recommended approach - uninstall the global package:
+Build the library for production:
+
+```bash
+npm run build
+```
+
+## Watch Mode
+
+Rebuild on file changes:
+
+```bash
+npm run watch
+```
+
+## Publishing
+
+```bash
+npm publish
+```
+
+## Project Structure
 
 ```
-npm uninstall -g package-name
+src/
+├── main.ts              # Entry point — exports all public APIs
+├── hooks/
+│   └── useIsMobile/     # Example of React hook for mobile detection
+│       └── index.ts
+└── utils/
+    └── utilities.ts     # Example of a utility function
 ```
 
-This completely removes the symlink, ensuring that subsequent npm create commands will use the registry version.
+## Output
 
-[https://dev.to/receter/how-to-create-a-react-component-library-using-vites-library-mode-4lma](https://dev.to/receter/how-to-create-a-react-component-library-using-vites-library-mode-4lma)
+The build outputs:
+
+- `dist/main.js` — ES module bundle
+- `dist/main.d.ts` — TypeScript declarations
+
+## License
+
+MIT
