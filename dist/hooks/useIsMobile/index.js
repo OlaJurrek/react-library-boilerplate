@@ -1,5 +1,5 @@
 import { useLayoutEffect as e, useState as t } from "react";
-//#region src/lib/hooks/useIsMobile/index.ts
+//#region src/hooks/useIsMobile/index.ts
 var n = 992, r = (r = n) => {
 	let [i, a] = t(!1);
 	return e(() => {

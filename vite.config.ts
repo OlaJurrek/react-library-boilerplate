@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ['src/lib'],
+      include: ['src/'],
       tsconfigPath: './tsconfig.lib.json',
       insertTypesEntry: true,
       copyDtsFiles: true,
@@ -18,14 +18,14 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname, 'src/lib/main.ts'),
+      entry: resolve(__dirname, 'src/main.ts'),
       formats: ['es'],
     },
     rolldownOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       input: Object.fromEntries(
-        globSync(['src/lib/main.ts', 'src/lib/**/**/*.{ts,tsx}', 'src/lib/**/*.{ts,tsx}']).map((file: string) => [
-          relative('src/lib', file.slice(0, file.length - extname(file).length)),
+        globSync(['src/main.ts', 'src/**/*.{ts,tsx}']).map((file: string) => [
+          relative('src', file.slice(0, file.length - extname(file).length)),
           fileURLToPath(new URL(file, import.meta.url)),
         ]),
       ),
